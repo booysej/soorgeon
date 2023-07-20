@@ -120,7 +120,7 @@ Finally, we generate the pipeline.yaml file.
 """
 import shutil
 import traceback
-import ast
+import ast # ast library short discription: https://www.geeksforgeeks.org/ast-abstract-syntax-tree-in-python/
 import pprint
 from collections import namedtuple
 from pathlib import Path
@@ -439,15 +439,15 @@ FunctionNeedsFix = namedtuple('FunctionNeedsFix', ['name', 'pos', 'args'])
 
 def _check_syntax(code):
     try:
-        ast.parse(code)
-    except SyntaxError:
+        ast.parse(code) ## Display the abstract syntax tree (AST) of a Python source file or expression.
+    except SyntaxError: # for R maybe use: https://search.r-project.org/CRAN/refmans/lobstr/html/ast.html ?????
         error = traceback.format_exc()
     else:
         error = None
 
     if error:
         raise exceptions.InputSyntaxError(f'Could not refactor notebook due '
-                                          f'to invalid syntax\n\n {error}')
+                                        f'to invalid syntax\n\n {error}')
 
 
 def _check_no_star_imports(code):
